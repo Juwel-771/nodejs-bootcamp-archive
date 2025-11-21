@@ -24,7 +24,9 @@ app.get('/friends', (req, res)=>{
 
 app.get('/friends/:friendId', (req, res)=>{
     const friendId = Number(req.params.friendId);
+    // console.log(friendId);
     const friend = friends[friendId];
+    // console.log(friend);
     
     if(friend){
         res.status(200).json(friend);
