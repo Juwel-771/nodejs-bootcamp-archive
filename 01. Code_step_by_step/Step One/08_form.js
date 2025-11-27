@@ -21,7 +21,19 @@ http.createServer((req,res)=>{
             req.on("end", ()=>{
                 let rawData = Buffer.concat(dataBody).toString();
                 let readableData = queryString.parse(rawData);
+                let dataString = "Name is: " + readableData.name+" Email : "+readableData.email;
                 console.log(readableData);
+                console.log(dataString);
+                // * sychronize system to create file
+                // fs.writeFileSync("documents/"+readableData.name+".txt", dataString);
+
+                // * Asynchronize system to create file
+                fs.writeFile("documents/"+readableData.name+".txt", dataString, "utf-8", (err)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                });
+                console.log("File Created");
             })
             res.write("<h1>Data Submitted</h1>");
             res.end();
