@@ -29,8 +29,14 @@ app.get("/about", (req, res)=>{
 //     res.redirect("https://www.google.com")
 // });
 
+app.use(express.json())
+
 app.get("/user", (req, res)=>{
     res.render('user')
+});
+
+app.post("/user", (req, res)=>{
+    res.send(req.body)
 })
 
 app.listen(3000, ()=>{
