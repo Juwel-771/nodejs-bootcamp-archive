@@ -9,7 +9,14 @@ const firstMiddleware = (req, res, next)=>{
     next();
 }
 
-app.use(firstMiddleware);
+const customMiddleware = (req, res, next)=>{
+    const timeStamp = new Date().toISOString();
+
+    console.log(`${timeStamp} from method ${req.method} and URL ${req.url}`)
+    next();
+}
+
+app.use(firstMiddleware, customMiddleware);
 
 app.get("/", (req, res)=>{
     res.send("Home Page");
